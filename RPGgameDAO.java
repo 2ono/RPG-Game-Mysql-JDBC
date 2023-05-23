@@ -4,11 +4,13 @@ import java.sql.SQLException;
 
 public class RPGgameDAO {
 
+	private final JDBC dbConnector = new JDBC();
+	
 	public void enrollGame(String name)
 			throws SQLException {
 		try {
 
-			Connection c = JDBC.createC();
+			Connection c = dbConnector.createC();
 //			String q = "insert into human(id,name,age,email,address) values(?,?,?,?,?);";
 			String q = "insert into human(human_name) values(?)";
 
@@ -40,5 +42,32 @@ public class RPGgameDAO {
 
 		// visit restaurants to gain Level resrant table > level table > human table
 
+	}
+	
+	
+	public void huntAnimal(int hunt) throws ClassNotFoundException, SQLException {
+		try {
+			Connection cnn = dbConnector.createC();
+			
+			String q = "insert into hunting(exercise_hour) values(?);";
+			
+			//자동 커밋 비활성화
+			cnn.setAutoCommit(false);
+			
+			// SQL injection 방어
+			PreparedStatement pstm = cnn.prepareStatement(q);
+			
+			pstm.setInt(1, hunt);
+			pstm.addBatch();
+			pstm.executeBatch();
+			cnn.commit();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
