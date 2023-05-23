@@ -68,6 +68,47 @@ public class RPGgameDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+	
+	
+	public void levelCheck() throws ClassNotFoundException, SQLException {
+		try {
+			Connection cn = dbConnector.createC();
+			String q = "";
+			// update level set level = level + hunting.exercise_hour where level.human_id = hunting.human_id;
+			
+			// 자동 커밋 비활성화
+			cn.setAutoCommit(false);
+			
+			// SQL injection 방어
+			PreparedStatement pstm = cn.prepareStatement(q);
+			
+			pstm.executeUpdate();
+			
+			cn.commit();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getEnergy() throws ClassNotFoundException, SQLException {
+		Connection cn = dbConnector.createC();
+		String q = "";
+		
+		cn.setAutoCommit(false);
+		
+		// SQL injection 방어
+		PreparedStatement pstm = cn.prepareStatement(q);
+		
+		pstm.executeUpdate();
+		
+		cn.commit();
+	}
+	
+	
+	
 }
